@@ -1,4 +1,4 @@
-import React, { useId } from "react";
+import React, { useId, forwardRef } from "react";
 
 function Select({ options, label, className, ...props }, ref) {
   const id = useId();
@@ -14,14 +14,14 @@ function Select({ options, label, className, ...props }, ref) {
              focus:bg-gray-50 duration-200 border border-gray-200 w-full 
               ${className}`}
       >
-        {options?.map((option) => {
+        {options?.map((option) => (
           <option key={option} value={option}>
             {option}
-          </option>;
-        })}
+          </option>
+        ))}
       </select>
     </div>
   );
 }
 
-export default React.forwardRef(Select);   //! Another method for forwardRef
+export default forwardRef(Select); //! Another method for forwardRef
