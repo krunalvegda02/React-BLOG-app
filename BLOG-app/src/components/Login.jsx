@@ -55,6 +55,8 @@ function Login() {
 
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
+            
+            //Email Field with validation
             <Input
               label="Email:"
               placeholder="Enter your email"
@@ -63,23 +65,27 @@ function Login() {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.
-                  test(value)
-                  || "Email address must be a valid adddress",
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                      value
+                    ) || "Email address must be a valid adddress",
                 },
               })}
             />
+
+            // Password FIeld 
             <Input
-            label="Password:"
-            type="password"
-            placeholder="Enter your password"
-            {...register("password", {
-              required: true,
-            })}
+              label="Password:"
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", {
+                required: true,
+              })}
             />
-            <Button 
-            type="submit"
-            className="w-full">Sign in</Button>
+
+            //Sign In Button
+            <Button type="submit" className="w-full rounded-lg">
+              Sign in
+            </Button>
           </div>
         </form>
       </div>

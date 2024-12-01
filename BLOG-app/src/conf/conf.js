@@ -7,3 +7,5 @@ const conf = {
 };
 
 export default conf
+
+//*Created for using this long values in appwrite for appwrite database changes.

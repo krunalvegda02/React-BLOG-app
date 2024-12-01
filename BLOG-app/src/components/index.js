@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import LogoutBtn from "./Header/LogoutBtn";
 import Btn from "./Btn"
 import PostCard from "./PostCard";
+import AuthLayout from "./AuthLayout";
 // import Select from "./Select";
 
-export { Footer, Header, Container, Logo, LogoutBtn, Btn, PostCard };
+export { Footer, Header, Container, Logo, LogoutBtn, Btn, PostCard, AuthLayout};

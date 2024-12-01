@@ -10,8 +10,8 @@ export class Service {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
-    this.databases = new Databases(this.Client);
-    this.storage = new Storage(this.Client);
+    this.databases = new Databases(this.client);
+    this.storage = new Storage(this.client);
   }
 
   async createPost({ title, slug, content, featuredImage, status, useraId }) {
@@ -36,7 +36,7 @@ export class Service {
   async updatePost(slug, { title, content, featuredImage, status }) {
     try {
       return await this.databases.updateDocument(
-        cpnf.appwriteDatabaseId,
+        conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
         {
@@ -51,7 +51,7 @@ export class Service {
     }
   }
 
-  async deletePost() {
+  async deletePost(slug) {
     try {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
@@ -115,7 +115,7 @@ export class Service {
     }
   }
 
-  getFilePriview(fileId) {
+  getFilePreview(fileId) {
     return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
   }
   

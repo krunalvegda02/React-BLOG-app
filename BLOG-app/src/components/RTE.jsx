@@ -2,6 +2,7 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 
+//*TEXT EDITOR CONTAINER
 export default function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <div className="w-full">

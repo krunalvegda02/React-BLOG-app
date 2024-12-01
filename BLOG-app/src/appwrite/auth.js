@@ -12,42 +12,49 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
-  async creatAccount({ email, password, name }) {
+  async createAccount({ email, password, name }) {
     try {
       const userAccount = await this.account.create(
-        ID.unique(), email, password, name
+        ID.unique(),
+        email,
+        password,
+        name
       );
       if (userAccount) {
-        //TODO: call another method
+        //TODO: call another method  to route on another page
       } else {
+        //console.log("Account created successfully:", userAccount);
         return userAccount;
       }
     } catch (error) {
-      console.log("Appwrite aervice :: userACCOUNT :: error", error);
+      console.log("Appwrite service :: create Account :: error", error);
     }
   }
 
-  async login() {
+  async login({ email, password }) {
     try {
       return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
-      console.log("Appwrite aervice :: login :: error", error);
+      console.log("Appwrite service :: login :: error", error);
     }
   }
 
   async logout() {
-    try {                                           //* Remove Acccount from this seession.... 
-        await this.account.deleteSession();         //* if we use sessions then it will remove account from all sessions          
-    } catch (error) {                                  
+    try {
+      //* Remove Acccount from this seession....
+      await this.account.deleteSession(); //* if we use sessions then it will remove account from all sessions
+    } catch (error) {
       console.log("Appwrite aervice :: logout :: error", error);
     }
   }
 
   async getCurrentUser() {
     try {
-      return await this.account.get();
+      const user = await this.account.get();
+      console.log("Logged out successfully");
+      return user;
     } catch (error) {
-      console.log("Appwrite aervice :: getCurrentUser :: error", error);
+      console.log("Appwrite aervice :: get current User :: error", error);
     }
     return null;
   }
