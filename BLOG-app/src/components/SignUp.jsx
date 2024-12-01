@@ -15,11 +15,11 @@ function SignUp() {
   const createAcc = async (data) => {
     setError("");
     try {
-      const userData = await authService.creatAccount(data);
+      const userData = await authService.createAccount(data);
       if (userData) {
-        const userData = await authService.getCurrentUser();
-        if (userData) {
-          dispatch(login(userData));
+        const currentuserData = await authService.getCurrentUser();
+        if (currentuserData) {
+          dispatch(login(currentuserData));
         }
         navigate("/");
       }
@@ -45,7 +45,7 @@ function SignUp() {
           Already have an account?&nbsp;
           <Link
             to="/login"
-            className="fomt-medium text-primary transition-all duration-200 hover:underline"
+            className="font-medium text-primary transition-all duration-200 hover:underline"
           >
             Sign In
           </Link>

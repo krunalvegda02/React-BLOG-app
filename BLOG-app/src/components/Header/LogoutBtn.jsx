@@ -8,11 +8,15 @@ function LogoutBtn() {
   const logoutHandler = () => {
     authService.logout().then(() => {
       dispatch(logout());
+    }).catch((error) => {
+      console.log("Error during logout:", error);
     });
   };
 
   return (
-    <button className="inline-block px-6 duration-200 hover:bg-blue-100 rounded-full">
+    <button 
+    onClick={logoutHandler}
+    className="inline-block px-6 duration-200 hover:bg-blue-100 rounded-full">
       Log out!
     </button>
   );

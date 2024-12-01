@@ -51,7 +51,7 @@ function Login() {
             Sign Up
           </Link>
         </p>
-        {error && <p className="text-red-600 mt-8 text-center"> {center} </p>}
+        {error && <p className="text-red-600 mt-8 text-center"> {error} </p>}
 
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
@@ -71,6 +71,7 @@ function Login() {
                 },
               })}
             />
+       //todo: {error.email && <p className="text-red-600">{error.email.message}</p>}  
 
             // Password FIeld 
             <Input
@@ -81,6 +82,7 @@ function Login() {
                 required: true,
               })}
             />
+  //todo: {error.password && <p className="text-red-600">{error.password.message}</p>} 
 
             //Sign In Button
             <Button type="submit" className="w-full rounded-lg">
