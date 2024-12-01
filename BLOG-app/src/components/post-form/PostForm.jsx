@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Button, Input, Select, RTE } from "../index";
+import { Btn, Input, Select, RTE } from "../index";
 import { useForm } from "react-hook-form";
 import appwriteService from "../../appwrite/config_service";
 import { useNavigate } from "react-router-dom";
@@ -131,13 +131,13 @@ function PostForm({ post }) {
           className="mb-4"
           {...register("status", { required: true })}
         />
-        <Button
+        <Btn
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
           className="w-full"
         >
           {post ? "Update" : "Submit"}
-        </Button>
+        </Btn>
       </div>
     </form>
   );

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import authService from "../appwrite/auth";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/authSlice";
-import { Button, Logo, Input } from "../components/index";
+import { Btn, Logo, Input } from "../components/index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -17,9 +17,9 @@ function SignUp() {
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
-        const currentuserData = await authService.getCurrentUser();
-        if (currentuserData) {
-          dispatch(login(currentuserData));
+        const userData = await authService.getCurrentUser();
+        if (userData) {
+          dispatch(login(userData));
         }
         navigate("/");
       }
@@ -83,9 +83,9 @@ function SignUp() {
                 required: true,
               })}
             />
-            <Button type="submit" className="w-full">
+            <Btn type="submit" className="w-full">
               Create Account
-            </Button>
+            </Btn>
           </div>
         </form>
       </div>

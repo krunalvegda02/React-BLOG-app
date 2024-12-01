@@ -7,13 +7,17 @@ function AllPosts() {
   useEffect(() => {}, []);
 
   appwriteService.getPosts([].then((posts) => setPosts(posts)));
-  return <div className="py-8 w-full"> 
-  <Container>
-    {posts.map((post)=> {
-        <PostCard key={post.$id} post={post} />
-            })}
-  </Container>
-  </div>;
+  return (
+    <div className="py-8 w-full">
+      <Container>
+        {posts.map((post) => {
+          <div key={post.$id} className="p-2 w-1/4">
+            <PostCard post={post} />;
+          </div>;
+        })}
+      </Container>
+    </div>
+  );
 }
 
 export default AllPosts;

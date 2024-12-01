@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { login as storeLogin } from "../redux/authSlice";
-import { Button, Input, Logo } from "./index";
+import { Btn, Input, Logo } from "./index";
 
 function Login() {
   const navigate = useNavigate();
@@ -85,9 +85,9 @@ function Login() {
   //todo: {error.password && <p className="text-red-600">{error.password.message}</p>} 
 
             //Sign In Button
-            <Button type="submit" className="w-full rounded-lg">
+            <Btn type="submit" className="w-full rounded-lg">
               Sign in
-            </Button>
+            </Btn>
           </div>
         </form>
       </div>
