@@ -13,7 +13,7 @@ export default function RTE({
     <div className="w-full">
       {label && <label className="inline-block mb-1 pl-1">{label}</label>}
 
-      <Controller
+//! react hook form Controller      <Controller
         name={name}
         control={control}
         //! render Editor onchange event
@@ -21,8 +21,8 @@ export default function RTE({
           return (
             <Editor
               initialValue={defaultValue}
-              init={{
-                branding: false,
+              init={
+                {branding: false,
                 height: 500,
                 menubar: true,
                 plugins: [
@@ -34,7 +34,8 @@ export default function RTE({
                   "undo redo | block | image | forecolor | formatselect | bold italic | underline |  alignleft aligncenter alignright alignjustify |  bullist numlist outdent indent | removeformate| help",
                 content_style:
                   "body { font-family: Helvetica, Arial, sans-serif; font-size: 14px }",
-              }}
+              }
+            }
               onEditorChange={onChange}
             />
           );
