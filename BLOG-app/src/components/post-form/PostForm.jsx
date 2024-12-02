@@ -121,7 +121,7 @@ function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
-        {post && (
+        {/* {post && (
           <div className="w-full mb-4">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
@@ -129,7 +129,7 @@ function PostForm({ post }) {
               className="rounded-lg"
             />
           </div>
-        )}
+        )} */}
         <Select
           options={["active", "inactive"]}
           label="Status"
