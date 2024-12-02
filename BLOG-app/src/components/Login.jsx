@@ -7,7 +7,7 @@ import { login as storeLogin } from "../redux/authSlice";
 import { Btn, Input, Logo } from "./index";
 
 function Login() {
-  const navigate = useNavigate();
+  const  navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState();
