@@ -11,55 +11,60 @@ function PostForm({ post }) {
       defaultValues: {
         title: post?.title || "",
         content: post?.content || "",
-        slug: post?.tslug || "",
-        status: post?.status || "",
+        slug: post?.$id || "",
+        status: post?.status || "active",
       },
     });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userdata = useSelector((state) => state.auth.userData);
+  const userId =  userdata.userData.$id;
+  console.log(userdata);
+  console.log(userId);
+  
 
+  // Function to handle form submission
   const submit = async (data) => {
-    //*IF WE have post then it means we came here to  updte the Form
+    //* IF we have post then it means we came here to update the Form
     if (post) {
       const file = data.image[0]
-        ? appwriteService.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (file) {
-        appwriteService.deleteFile(post.featuredImsge);
+        await appwriteService.deleteFile(post.featuredImage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
-
-        if(dbPost) {
-          navigate(`/post/${dbPost.id}`);
-        },
+        featuredImage: file ? file.$id : post.featuredImage,
       });
+
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     }
-    //*ELSE it means that we came here to updte the form
+    //* ELSE it means that we came here to add the form
     else {
-      const file = await appwriteService.uploadFileI(data.image[0]);
+      const file = await appwriteService.uploadFile(data.image[0]);
 
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
-          userId: userData.$id,
+          userid: userId,
         });
-
         if (dbPost) {
-          navigate(`/posts/${dbPost.id}`);
+          navigate(`/post/${dbPost.$id}`);
         }
       }
     }
   };
 
-  // slug transform for transforming slug like space stansforms in dash etc
+  // slug transform for transforming slug like space turns into a dash
   const slugTransform = useCallback((value) => {
-    if (value && typeof value == "string") {
+    if (value && typeof value === "string") {
       const slug = value.toLowerCase().replace(/ /g, "-");
       setValue("slug", slug);
       return slug;
@@ -70,17 +75,17 @@ function PostForm({ post }) {
 
   React.useEffect(() => {
     const subscription = watch((value, { name }) => {
-      if (name == "title") {
-        setValue("slug", slugTransform(value.title, { shouldValidate: true }));
+      if (name === "title") {
+        setValue("slug", slugTransform(value.title), { shouldValidate: true });
       }
     });
+
     return () => {
       subscription.unsubscribe();
     };
   }, [watch, slugTransform, setValue]);
 
-
-  //main return
+  // Main return
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
