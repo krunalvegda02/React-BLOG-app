@@ -19,7 +19,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <Home /> },
+      {
+         path: "/", 
+         element: <Home /> 
+      },
       {
         path: "/login",
         element: (
@@ -38,7 +41,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/all-posts",
+        path: "/allposts",
         element: (
           <AuthLayout authentication>
             <AllPosts />
@@ -46,7 +49,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-post",
+        path: "/addpost",
         element: (
           <AuthLayout authentication>
             <AddPost />
@@ -69,6 +72,5 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <RouterProvider router={router} />
-   {/* <App /> */}
   </Provider>
 );

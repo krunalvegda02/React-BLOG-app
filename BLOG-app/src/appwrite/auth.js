@@ -21,7 +21,8 @@ export class AuthService {
         name
       );
       if (userAccount) {
-        //TODO: call another method  to route on another page
+        console.log("ACOUNT CREATED");
+        return this.login({email, password});
       } else {
         //console.log("Account created successfully:", userAccount);
         return userAccount;
@@ -39,22 +40,26 @@ export class AuthService {
     }
   }
 
+
   async logout() {
     try {
-      //* Remove Acccount from this seession....
-      await this.account.deleteSession(); //* if we use sessions then it will remove account from all sessions
+      // Delete the current session
+      await this.account.deleteSession('current'); // 'current' will target the active session
+  
+      console.log("Logged out successfully");
     } catch (error) {
-      console.log("Appwrite aervice :: logout :: error", error);
+      console.log("Appwrite service :: logout :: error", error);
     }
   }
+  
+  
 
   async getCurrentUser() {
     try {
-      const user = await this.account.get();
-      console.log("Logged out successfully");
-      return user;
+      console.log(this.account.get());
+      return await this.account.get();
     } catch (error) {
-      console.log("Appwrite aervice :: get current User :: error", error);
+      console.log("Appwrite service :: get current User :: error", error);
     }
     return null;
   }

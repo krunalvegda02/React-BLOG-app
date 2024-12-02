@@ -6,11 +6,11 @@ import authService from "../appwrite/auth";
 import { login as storeLogin } from "../redux/authSlice";
 import { Btn, Input, Logo } from "./index";
 
-function Login() {
-  const  navigate = useNavigate();
+function LoginComponent() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
-  const [error, setError] = useState();
+  const { register, handleSubmit, formState: { errors } } = useForm(); // Destructure errors here
+  const [error, setError] = useState("");
 
   const login = async (data) => {
     setError("");
@@ -55,36 +55,36 @@ function Login() {
 
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
-            
-            //Email Field with validation
+            {/* Email Field with validation */}
             <Input
               label="Email:"
               placeholder="Enter your email"
               type="email"
               {...register("email", {
-                required: true,
+                required: "Email is required", // Custom error message
                 validate: {
                   matchPatern: (value) =>
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                      value
-                    ) || "Email address must be a valid adddress",
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ||
+                    "Email address must be a valid address",
                 },
               })}
             />
-       //todo: {error.email && <p className="text-red-600">{error.email.message}</p>}  
+            {/* Display error message for email */}
+            {errors.email && <p className="text-red-600">{errors.email.message}</p>}
 
-            // Password FIeld 
+            {/* Password Field */}
             <Input
               label="Password:"
               type="password"
               placeholder="Enter your password"
               {...register("password", {
-                required: true,
+                required: "Password is required",
               })}
             />
-  //todo: {error.password && <p className="text-red-600">{error.password.message}</p>} 
+            {/* Display error message for password */}
+            {errors.password && <p className="text-red-600">{errors.password.message}</p>}
 
-            //Sign In Button
+            {/* Sign In Button */}
             <Btn type="submit" className="w-full rounded-lg">
               Sign in
             </Btn>
@@ -95,4 +95,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginComponent;

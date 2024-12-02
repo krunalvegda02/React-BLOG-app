@@ -12,9 +12,9 @@ function App() {
   useEffect(() => {
     authService
       .getCurrentUser()
-      .then((userdata) => {
-        if (userdata) {
-          dispatch(login({ userdata }));
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }));
         } else {
           dispatch(logout());
         }
@@ -23,16 +23,21 @@ function App() {
   }, []);
 
   return !loading ? (
-    <div className="min-h-screen flrx flex-wrap ">
+    <div className="min-h-screen flex flex-wrap ">
       <div className="w-full block">
         <Header />
         <main>
-          {/* //TODO {<Outlet />} */}
+          <Outlet /> 
+          {/* Outlet for rendering child routes */}
         </main>
         <Footer />
       </div>
     </div>
-  ) : null;
+  ) :(
+    <div className="flex items-center justify-center min-h-screen">
+      <p>Loading...</p> {/* Added a simple loader */}
+    </div>
+  );
 
 }
 

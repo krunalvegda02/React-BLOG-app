@@ -8,12 +8,14 @@ export default function Protected({
 }) {
   let navigate = useNavigate();
   const [loader, setLoader] = useState(true);
-  const authStatus = useSelector((state) => state.auth.Status);
+  const authStatus = useSelector(state => state.auth.status);
 
   useEffect(() => {
     if (authentication && authStatus !== authentication) {
+      console.log("Redirecting to login...");
       navigate("/login");
     } else if (!authentication && authStatus !== authentication) {
+      console.log("Redirecting to home...");
       navigate("/");
     }
     setLoader(false);
