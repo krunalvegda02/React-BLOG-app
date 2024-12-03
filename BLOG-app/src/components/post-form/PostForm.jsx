@@ -41,14 +41,16 @@ function PostForm({ post }) {
         if (fileId) {
           // Delete the old file if a new one is uploaded
           await appwriteService.deleteFile(post.featured_image);
+          console.log("festured iamge",post.featured_image);
         }
 
         // Update the post
         const dbPost = await appwriteService.updatePost(post.$id, {
           ...data,
-          featured_image: fileId, // Use new or existing image
+          featured_image: fileId, 
+          // Use new or existing image
         });
-
+        console.log("file iamge",fileId);
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -108,7 +110,7 @@ function PostForm({ post }) {
           label="Title :"
           placeholder={post?.title || "title"}
           className="mb-4"
-          {...register("title", { required: !post })}
+          {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
