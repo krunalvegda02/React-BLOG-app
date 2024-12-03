@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
-  console.log("POST POST", post);
 
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -41,16 +40,16 @@ function PostForm({ post }) {
         if (fileId) {
           // Delete the old file if a new one is uploaded
           await appwriteService.deleteFile(post.featured_image);
-          console.log("festured iamge",post.featured_image);
+          console.log("festured iamge", post.featured_image);
         }
 
         // Update the post
         const dbPost = await appwriteService.updatePost(post.$id, {
           ...data,
-          featured_image: fileId, 
+          featured_image: fileId,
           // Use new or existing image
         });
-        console.log("file iamge",fileId);
+        console.log("file iamge", fileId);
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -114,7 +113,7 @@ function PostForm({ post }) {
         />
         <Input
           label="Slug :"
-          placeholder={post?.title ||"Slug"}
+          placeholder={post?.title || "Slug"}
           className="mb-4"
           {...register("slug", { required: !post })}
           onInput={(e) => {

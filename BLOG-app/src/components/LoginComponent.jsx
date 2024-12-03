@@ -4,15 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { login as storeLogin } from "../redux/authSlice";
-import { Btn, Input, Logo } from "./index";
+import { Btn, Input, Logo, Loading } from "./index";
 
 function LoginComponent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm(); // Destructure errors here
   const [error, setError] = useState("");
+  const [loading,setloading] = useState(false);
 
   const login = async (data) => {
+    setloading(true);
     setError("");
     try {
       const session = await authService.login(data);
@@ -29,7 +31,7 @@ function LoginComponent() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full bg-">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl
              p-10 border border-black/10`}
@@ -86,7 +88,7 @@ function LoginComponent() {
 
             {/* Sign In Button */}
             <Btn type="submit" className="w-full rounded-lg">
-              Sign in
+              { loading ? <Loading /> : "Sign in" }
             </Btn>
           </div>
         </form>

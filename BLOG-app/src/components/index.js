@@ -7,11 +7,11 @@ import Btn from "./Btn";
 import PostCard from "./PostCard";
 import AuthLayout from "./AuthLayout";
 import RTE from "./RTE";
-// import SignupComponent from "./SignupComponent";
-// import LoginComponent from "./LoginComponent";
 import Input from "../components/Header/Input";
 import PostForm from "./post-form/PostForm";
 import Select from "../components/Select";
+import Loading from "./Loading/Loading";
+import Loading1 from "./Loading/Loading1";
 
 export {
   Footer,
@@ -23,9 +23,9 @@ export {
   PostCard,
   AuthLayout,
   RTE,
-  // SignupComponent,
-  // LoginComponent,
   PostForm,
   Input,
   Select,
+  Loading,
+  Loading1,
 };

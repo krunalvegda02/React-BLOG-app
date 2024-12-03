@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Children } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo"
 
-function Footer() {
+function Footer({child}) {
   return (
-    <section className="relative overflow-hidden py-10 bg-gray-400 border border-t-2 border-t-black">
-      <div className="relative z-10 mx-auto max-w-7xl px-4">
+    <section className={`bottom-0  h-[200px] left-0 w-full pt-2  overflow-hidden bg-gray-400 border border-t-2 border-t-black z-10 ${child}`}  >
+      <div className="relative mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
             <div className="flex h-full flex-col justify-between">
@@ -21,7 +21,7 @@ function Footer() {
           </div>
           <div className="w-full p-6 md:w-1/2 lg:w-2/12">
             <div className="h-full">
-              <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
+              <h3 className="tracking-px mb-2  text-1xs font-semibold uppercase text-gray-500">
                 Company
               </h3>
               <ul>
@@ -62,7 +62,7 @@ function Footer() {
           </div>
           <div className="w-full p-6 md:w-1/2 lg:w-2/12">
             <div className="h-full">
-              <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
+              <h3 className="tracking-px mb-2  text-1xs font-semibold uppercase text-gray-500">
                 Support
               </h3>
               <ul>
@@ -103,7 +103,7 @@ function Footer() {
           </div>
           <div className="w-full p-6 md:w-1/2 lg:w-3/12">
             <div className="h-full">
-              <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
+              <h3 className="tracking-px mb-2  text-1xs font-semibold uppercase text-gray-500">
                 Legals
               </h3>
               <ul>
