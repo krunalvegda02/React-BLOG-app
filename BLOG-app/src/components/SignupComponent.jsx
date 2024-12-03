@@ -2,33 +2,46 @@ import React, { useState } from "react";
 import authService from "../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/authSlice";
-import { Btn, Logo, Input } from "./index";
+import { Btn, Logo, Input, Loading } from "./index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
 function SignupComponent() {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
   const dispatch = useDispatch();
+
+  const [error, setError] = useState("");
+  const [loading, setloading] = useState(false);
+
   const { register, handleSubmit } = useForm();
 
   const createAcc = async (data) => {
     setError("");
+    setloading(true);
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
         const userData = await authService.getCurrentUser();
         if (userData) dispatch(login(userData));
-          navigate("/");
-      
+        navigate("/");
       }
-    } catch (error) {
-      setError(error.message);
+    } catch (e) {
+      setError(e.message);
+      setloading(false);
+    } finally {
+      setloading(false);
     }
   };
 
+  // console.log("error",e.message);
+
   return (
     <div className="flex items-center justify-center">
+      {loading ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
+          <Loading />
+        </div>
+      ) : null}
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
       >
@@ -83,7 +96,7 @@ function SignupComponent() {
               })}
             />
             <Btn type="submit" className="w-full">
-              Create Account
+              "Create Account"
             </Btn>
           </div>
         </form>

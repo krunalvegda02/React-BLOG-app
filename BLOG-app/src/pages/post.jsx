@@ -4,7 +4,7 @@ import appwriteService from "../appwrite/config_service";
 import { Btn, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
-
+import {Loading} from "../components/index"
 export default function Post() {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
@@ -77,5 +77,13 @@ export default function Post() {
         </div>
       </Container>
     </div>
-  ) : null;
+  ) :  <Container>
+  <div className="text-center">
+    {
+      <div className="flex items-center justify-center min-h-screen">
+        <Loading />
+      </div>
+    }
+  </div>
+</Container>;
 }

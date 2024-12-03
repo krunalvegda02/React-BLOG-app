@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import appwriteService from "../appwrite/config_service";
-import { Container, PostCard } from "../components";
-
+import { Container, Loading1, Loading, PostCard } from "../components";
+import { useSelector } from "react-redux";
 
 function Home() {
-
   const [posts, setPosts] = useState([]); // Initialize posts as an empty array
-  
+  const userData = useSelector((state) => state.auth.userData);
+  console.log("userData", userData);
+
   useEffect(() => {
     appwriteService.getPosts().then((posts) => {
       if (posts) {
@@ -17,14 +18,20 @@ function Home() {
 
   if (posts.length === 0) {
     return (
-      <div className="w-full py-8 mt-4 text-center">
+      <div className="w-full h-screen flex justify-center items-center">
+        {" "}
+        {/* Center content */}
         <Container>
-          <div className="flex flex-wrap">
-            <div className="p-2 w-full">
-              <h1 className="text-2xl font-bold hover:text-gray-500">
-                Login to Read posts
+          <div className="text-center">
+            {userData ? (
+              <div className="flex items-center justify-center min-h-screen">
+                <Loading />
+              </div>
+            ) : (
+              <h1 className="text-2xl font-semibold font-mono hover:text-gray-500">
+                User must login to read posts
               </h1>
-            </div>
+            )}
           </div>
         </Container>
       </div>

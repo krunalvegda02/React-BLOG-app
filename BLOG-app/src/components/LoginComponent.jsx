@@ -9,9 +9,13 @@ import { Btn, Input, Logo, Loading } from "./index";
 function LoginComponent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, formState: { errors } } = useForm(); // Destructure errors here
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm(); // Destructure errors here
   const [error, setError] = useState("");
-  const [loading,setloading] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const login = async (data) => {
     setloading(true);
@@ -27,19 +31,26 @@ function LoginComponent() {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setloading(false);
     }
   };
 
   return (
     <div className="flex items-center justify-center w-full bg-">
+      {loading ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
+          <Loading />
+        </div>
+      ) : null}
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl
+        className={` mx-auto w-full max-w-lg bg-gray-100 rounded-xl
              p-10 border border-black/10`}
       >
-        <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
+        <div className="mb-2 fixed flex justify-center">
+          {/* <span className="w-full max-w-[100px]">
             <Logo width="100%" />
-          </span>
+          </span> */}
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
           Sign in to your account!
@@ -48,7 +59,7 @@ function LoginComponent() {
           Don&apos; t have any account?&nbsp;
           <Link
             to="/signup"
-            className="font-medium text-primary transition-all duration-200 hover:underline"
+            className="font-medium text-primary transition-all duration-200 hover:underline text-blue-600"
           >
             Sign Up
           </Link>
@@ -66,13 +77,16 @@ function LoginComponent() {
                 required: "Email is required", // Custom error message
                 validate: {
                   matchPatern: (value) =>
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ||
-                    "Email address must be a valid address",
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                      value
+                    ) || "Email address must be a valid address",
                 },
               })}
             />
             {/* Display error message for email */}
-            {errors.email && <p className="text-red-600">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-red-600">{errors.email.message}</p>
+            )}
 
             {/* Password Field */}
             <Input
@@ -84,11 +98,13 @@ function LoginComponent() {
               })}
             />
             {/* Display error message for password */}
-            {errors.password && <p className="text-red-600">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-red-600">{errors.password.message}</p>
+            )}
 
             {/* Sign In Button */}
             <Btn type="submit" className="w-full rounded-lg">
-              { loading ? <Loading /> : "Sign in" }
+              Sign in
             </Btn>
           </div>
         </form>

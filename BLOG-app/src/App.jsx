@@ -4,6 +4,8 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./redux/authSlice";
 import { Header, Footer } from "./components";
 import { Outlet } from 'react-router-dom'
+import {Loading} from "./components/index";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ function App() {
     </div>
   ) :(
     <div className="flex items-center justify-center min-h-screen">
-      <p>Loading...</p> {/* Added a simple loader */}
+       <Loading />
     </div>
   );
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import appwriteService from "../appwrite/config_service";
 import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
-
+import {Loading} from "../components/index";
 function AllPosts() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -26,6 +26,24 @@ function AllPosts() {
     })
     .toString();
   console.log("mypostids", myPostId);
+
+  if (posts.length === 0) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        {" "}
+        {/* Center content */}
+        <Container>
+          <div className="text-center">
+            {
+              <div className="flex items-center justify-center min-h-screen">
+                <Loading />
+              </div>
+            }
+          </div>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="py-2 w-full ">
