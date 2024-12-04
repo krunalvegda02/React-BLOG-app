@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../assets/logos/bgLogo.png"
+import logo from "../../assets/logos/bgLogo.png"
 
 function Logo({h,w}) {
   return (

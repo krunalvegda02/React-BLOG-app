@@ -24,7 +24,7 @@ function LogoutBtn({ setLoading }) {
   return (
     <button
       onClick={logoutHandler}
-      className="inline-block px-3 duration-200  hover:bg-red-200 rounded-full text-red-600 text-2xl font-medium"
+      className="inline-block px-3 pt-1.5 duration-200  hover:bg-red-200 rounded-full text-red-600 text-2xl font-medium"
     >
       Log out!
     </button>

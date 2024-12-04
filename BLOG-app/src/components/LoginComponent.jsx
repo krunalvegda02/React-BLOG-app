@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { login as storeLogin } from "../redux/authSlice";
-import { Btn, Input, Logo, Loading } from "./index";
+import { Btn, Input, Loading, AuthLogo } from "./index";
 
 function LoginComponent() {
   const navigate = useNavigate();
@@ -47,10 +47,12 @@ function LoginComponent() {
         className={` mx-auto w-full max-w-lg bg-gray-100 rounded-xl
              p-10 border border-black/10`}
       >
-        <div className="mb-2 fixed flex justify-center">
-          {/* <span className="w-full max-w-[100px]">
-            <Logo width="100%" />
-          </span> */}
+        <div className="mb-2  flex justify-center">
+          <div className="mb-2 flex justify-center">
+            <Link to="/">
+              <AuthLogo w={200} />
+            </Link>
+          </div>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
           Sign in to your account!

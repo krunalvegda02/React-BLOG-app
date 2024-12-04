@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import authService from "../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/authSlice";
-import { Btn, Logo, Input, Loading } from "./index";
+import { Btn, Input, Loading, AuthLogo } from "./index";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -26,7 +26,7 @@ function SignupComponent() {
         navigate("/");
       }
     } catch (e) {
-      setError(e.message);
+      setError(e?.message);
       setloading(false);
     } finally {
       setloading(false);
@@ -46,9 +46,9 @@ function SignupComponent() {
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
       >
         <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
-          </span>
+        <Link to="/">
+              <AuthLogo  w={200} />
+       </Link>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
           SignUp to create an account!
