@@ -17,11 +17,19 @@ function PostForm({ post }) {
     });
 
   const [imagePreview, setImagePreview] = useState(null); // State for file preview
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const userdata = useSelector((state) => state.auth.userData);
-  const userId = userdata.userData.$id;
+  const userId = userdata?.userData?.$id;
+
+  React.useEffect(() => {
+    if (post) {
+      setLoading(false); // Set loading to false once the `post` is ready
+    } else {
+      setTimeout(() => setLoading(false), 200);
+    }
+  }, [post]);
 
   // Function to handle form submission
   const submit = async (data) => {
@@ -31,18 +39,23 @@ function PostForm({ post }) {
       // Handle file upload if an image is selected
       if (data.image && data.image[0]) {
         const file = await appwriteService.uploadFile(data.image[0]);
+        console.log(file);
         if (file) {
           fileId = file.$id; // Get uploaded file ID
+          console.log("fileid: ", fileId)
+          
         }
       }
-
       // If editing an existing post
       if (post) {
-        if (fileId) {
-          // Delete the old file if a new one is uploaded
-          await appwriteService.deleteFile(post.featured_image);
-          // console.log("festured iamge", post.featured_image);
-        }
+        console.log("post",post);
+        
+        console.log("festured iamge", post.featured_image);
+        // if (!fileId) {
+        //   // Delete the old file if a new one is uploaded
+        //   await appwriteService.deleteFile(post.featured_image);
+          
+        // }
 
         // Update the post
         const dbPost = await appwriteService.updatePost(post.$id, {
@@ -106,6 +119,14 @@ function PostForm({ post }) {
       setImagePreview(URL.createObjectURL(file)); // Preview selected file
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loading />
+      </div>
+    );
+  }
 
   // Main return
   return (

@@ -2,19 +2,23 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth";
 import { logout } from "../../redux/authSlice";
+import { useNavigate } from "react-router";
 
-function LogoutBtn() {
+function LogoutBtn({ setLoading }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const logoutHandler = () => {
-    authService
-      .logout()
-      .then(() => {
-        dispatch(logout());
-      })
-      .catch((error) => {
-        console.log("Error during logout:", error);
-      });
+  const logoutHandler = async () => {
+    try {
+      setLoading(true);
+      await authService.logout();
+      dispatch(logout());
+      navigate("/");
+    } catch (error) {
+      console.log("Error during logout:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

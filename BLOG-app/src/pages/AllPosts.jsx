@@ -3,31 +3,40 @@ import appwriteService from "../appwrite/config_service";
 import { Container, PostCard } from "../components";
 import { useSelector } from "react-redux";
 import {Loading} from "../components/index";
+import { Query } from "appwrite";
+
 function AllPosts() {
   const [posts, setPosts] = useState([]);
+  const userdata = useSelector((state) => state.auth.userData);
+  const userid = userdata?.userData?.$id;
+
+  const query = [
+    Query.equal("userid", userid)  
+  ];
+
   useEffect(() => {
-    appwriteService.getPosts([]).then((posts) => {
+    appwriteService.getPosts(query).then((posts) => {
       if (posts) {
         setPosts(posts.documents);
       }
     });
-  }, []);
-  const userdata = useSelector((state) => state.auth.userData);
-  const userid = userdata.userData.$id;
-  // console.log(userid);
-  // console.log("post", posts);
-  // console.log("userid",  posts.$id);
-
+  }, [userid]);
+ 
   const allPostIdArray = posts.map((id) => id.userid);
   console.log(allPostIdArray);
+
   const myPostId = allPostIdArray
     .filter((id) => {
       return id == userid;
-    })
-    .toString();
+    });
+  console.log("POST",posts);
+  // console.log("postid", posts[1][title]);
+  
+  
   console.log("mypostids", myPostId);
 
-  if (posts.length === 0) {
+  //Loading indicator
+  if (posts.length === 0 || !userdata) {
     return (
       <div className="w-full h-screen flex justify-center items-center">
         {" "}

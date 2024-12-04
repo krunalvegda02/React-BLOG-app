@@ -13,7 +13,7 @@ export default function Post() {
   const userData = useSelector((state) => state.auth.userData);
 
   const isAuthor =
-    post && userData ? post.userid === userData.userData.$id : false;
+    post && userData ? post.userid === userData?.userData?.$id : false;
 //  console.log("usrid", userData.userData.$id);
 //  console.log("post data", isAuthor);
 //  console.log("post id", post.userid);

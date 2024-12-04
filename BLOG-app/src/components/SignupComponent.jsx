@@ -38,7 +38,7 @@ function SignupComponent() {
   return (
     <div className="flex items-center justify-center">
       {loading ? (
-        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50 z-10">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-10">
           <Loading />
         </div>
       ) : null}
