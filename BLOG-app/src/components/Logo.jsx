@@ -1,9 +1,10 @@
 import React from 'react'
+import logo from "../assets/logos/bgLogo.png"
 
-function Logo({width="100px"}) {
+function Logo({h,w}) {
   return (
     <div>
-      LOGO
+       <img src={logo} alt="logo" height={h} width={w} />
     </div>
   )
 }
